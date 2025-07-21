@@ -7,8 +7,11 @@ export async function addUser(username, password_hash) {
   if (existing) {
     return { alreadyExists: true, userId: existing._id };
   }
-  const result = await collection.insertOne({ username, password_hash });
+  const result = await collection.insertOne({ username, password: password_hash });
   return { alreadyExists: false, userId: result.insertedId };
 }
-
-
+// Get User By Username
+export async function getUserByUsername(username) {
+  const collection = await usersCollection();
+  return collection.findOne({ username });
+}
