@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { createAuthToken, setAuthCookie } from './auth.js';
 import { addUser, getUserByUsername } from '../DAL/usersDal.js';
 
 // Add User Controller - signup
@@ -34,6 +35,9 @@ export async function verifyController(req, res) {
   if (!isValid) {
     return res.status(401).send("Unauthorized");
   }
+  const token = createAuthToken(user);
+  setAuthCookie(res, token);
+
   res.status(200).send("Verified");
 }
 
