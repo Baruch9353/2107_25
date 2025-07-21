@@ -15,7 +15,7 @@ let db;
 export async function connectToMongo() {
   if (!db) {
     await client.connect();
-    db = client.db("RiddlesProject");
+    db = client.db("CipherNet");
     console.log("Connected to MongoDB");
   }
   return db;

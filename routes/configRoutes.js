@@ -1,6 +1,6 @@
-import riddlesRouter from './riddlesR.js';
+import usersRouter from './usersR.js';
 
 export default function configRoutes(app) {
-    app.use('/riddles', riddlesRouter); 
+    app.use('/users', usersRouter); 
 };
 
