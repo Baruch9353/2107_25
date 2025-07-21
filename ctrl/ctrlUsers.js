@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { verifiedUsers } from './verifiedUsers.js';
 import { addUser, getUserByUsername } from '../DAL/usersDal.js';
 
 // Add User Controller - signup
@@ -21,8 +20,6 @@ export async function addUserController(req, res) {
     userId: result.userId,
   });
 }
-
-
 // Verify Controller
 export async function verifyController(req, res) {
   const { username, password } = req.body;
@@ -37,8 +34,6 @@ export async function verifyController(req, res) {
   if (!isValid) {
     return res.status(401).send("Unauthorized");
   }
-  verifiedUsers[username] = true;
-  console.log(verifiedUsers);
   res.status(200).send("Verified");
 }
 
