@@ -1,9 +1,10 @@
 import express from 'express';
-import { addUserController } from '../ctrl/ctrlUsers.js';
+import { addUserController, verifyController } from '../ctrl/ctrlUsers.js';
 
 const router = express.Router();
 
-router.post('/addUser', addUserController);
+router.post('/signup', addUserController);
+router.post('/signin', verifyController);
 
 export default router;
 
