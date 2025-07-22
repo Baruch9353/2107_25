@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createAuthToken, setAuthCookie } from './auth.js';
+import { createAuthToken, setAuthCookie } from '../middlewares/authMiddleware.js';
 import { addUser, getUserByUsername } from '../DAL/usersDal.js';
 
 // Add User Controller - signup
@@ -21,7 +21,7 @@ export async function addUserController(req, res) {
     userId: result.userId,
   });
 }
-// Verify Controller
+// Verify Controller- signin
 export async function verifyController(req, res) {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -38,6 +38,9 @@ export async function verifyController(req, res) {
   const token = createAuthToken(user);
   setAuthCookie(res, token);
 
-  res.status(200).send("Verified");
+  res.status(200).json({ message: "Verified", username: user.username });
 }
-
+// Sends welcome message for authenticated users
+export function secretController(req, res) {
+  res.json({ message: `Welcome ${req.user.username}` });
+}

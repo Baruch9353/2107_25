@@ -1,11 +1,11 @@
 import express from 'express';
-import { addUserController, verifyController } from '../ctrl/ctrlUsers.js';
+import { authMiddleware } from '../middlewares/authMiddleware.js'; 
+import { addUserController, verifyController, secretController } from '../ctrl/ctrlUsers.js';
 
 const router = express.Router();
 
 router.post('/signup', addUserController);
 router.post('/signin', verifyController);
+router.get('/secret', authMiddleware(), secretController);
 
 export default router;
-
-
